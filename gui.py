@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter as tk
 
 #Establishes the first window
 master = Tk()
@@ -6,6 +7,23 @@ master.title("User Input for Player")
 
 master.rowconfigure(0,minsize=300, weight=1)
 master.columnconfigure(0,minsize=300,weight=1)
+
+#The first window where it asks the user for a player and takes in the player's name
+frame = Frame(master, relief=RAISED)
+frame.grid(row=0, column=0, sticky="ns")
+
+#the text box on the first window
+text_box = Label(frame,
+                    width=60,
+                    height=3,
+                    text="Which NBA player would you like to view stats for?",
+                    bg="RED")
+text_box.grid(row=0,columnspan=2)
+
+#the box for where the user inputs the player they want
+input = tk.Entry(master)
+input.grid(row=0, columnspan=2)
+user_inputted_player = input.get().title() #variable where the players name is saved
 
 #Function creates the second window which determines which stat whill be displayed on the graph
 def stat_window():
@@ -97,10 +115,12 @@ def stat_window():
                     text="Blocks Per Game")
     btn_blocks.grid(row=5, column=1)
 
-#Code for the first window where it takes in a player's name and brings up the second window
-frame = Frame(master, relief=RAISED)
-frame.grid(row=0, column=0, sticky="ns")
-btn_ppg = Button(command=stat_window)
-btn_ppg.grid(row=1, column=0)
+#button to bring the user to the second window
+btn_continue = Button(frame,
+                width=7,
+                height=1,
+                text="Continue",
+                command=stat_window)
+btn_continue.grid(row=1, column=0)
 
 master.mainloop()
